@@ -25,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .and()
 	        .authorizeRequests().antMatchers("/winelist").permitAll()
 	        .and()
+	        .authorizeRequests().antMatchers("/index").permitAll()
+	        .and()
 	        .authorizeRequests().anyRequest().authenticated()
 	        .and()
 	      .formLogin()
