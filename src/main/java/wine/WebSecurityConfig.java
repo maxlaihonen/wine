@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .and()
 	        .authorizeRequests().antMatchers("/winelist").permitAll()
 	        .and()
-	        .authorizeRequests().antMatchers("/index").permitAll()
+	        .authorizeRequests().antMatchers("/").permitAll()
 	        .and()
 	        .authorizeRequests().anyRequest().authenticated()
 	        .and()
