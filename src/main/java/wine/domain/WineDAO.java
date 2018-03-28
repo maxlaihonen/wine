@@ -28,6 +28,15 @@ public class WineDAO {
 		return wines;
 	}
 	
+	public Wine findOne(Long wineid) {
+		String sql = "select * from wines LEFT JOIN countries ON wines.countryid = countries.countryid where wines.wineid = ?;";
+		Object[] parameters = new Object[] { wineid };
+		RowMapper<Wine> mapper = new WineRowMapper();
+		Wine wine = jdbcTemplate.queryForObject(sql, parameters, mapper);
+		return wine;
+
+	}
+	
 	public void save(Wine wine) {
 		String sql = "insert into wines(type, winename, year, countryid, area, notes) values(?,?,?,?,?,?)";
 		Object[] parameters = new Object[] {
@@ -40,6 +49,12 @@ public class WineDAO {
 				};
 		jdbcTemplate.update(sql, parameters);
 
+	}
+	
+	public void delete(Long id) {
+		String sql = "delete from wines where wineid = ?";
+		Object[] parameters = new Object[] { id };
+		jdbcTemplate.update(sql, parameters);
 	}
 
 }

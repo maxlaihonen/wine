@@ -6,6 +6,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Wine {
 	
 	private long wineid;
@@ -14,6 +16,7 @@ public class Wine {
 	@Size(min=5, max=255)
 	private String winename;
 	
+	@JsonIgnore
 	@NotNull
 	private Country country;
 	
@@ -44,15 +47,13 @@ public class Wine {
 		this.notes = notes;
 	}
 	
-	public Wine(String winename, Country country, int year, String type, String area,
-			Timestamp timestamp, String notes) {
+	public Wine(String winename, Country country, int year, String type, String area, String notes) {
 		super();
 		this.winename = winename;
 		this.country = country;
 		this.year = year;
 		this.type = type;
 		this.area = area;
-		this.timestamp = timestamp;
 		this.notes = notes;
 	}
 	

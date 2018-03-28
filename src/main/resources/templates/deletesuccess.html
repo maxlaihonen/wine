@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Kaikki viinit</title>
+    <title>Poista viini</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/stickyfooter.css" th:href="@{/css/stickyfooter.css}" />
@@ -12,7 +12,7 @@
 	<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Viinilista</a>
+					<a class="navbar-brand" href="/winelist">Viinilista</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
@@ -31,34 +31,9 @@
 			</div>
 			<!--/.container-fluid -->
 		</nav>
-		
-
-	<h1>Kaikki viinit</h1>
-    <table class="table table-striped">
-		<tr>
-			<th>Tyyppi</th>
-		    <th>Nimi</th>
-		    <th>Vuosi</th>
-		    <th>Maa</th>
-		    <th>Alue</th>
-		    <th>Lisätty</th>
-		    <th>Muistiinpanot</th>
-		    <th sec:authorize="isAuthenticated()">Poista</th>
-		    
-		</tr>  
-    	<tr th:each = "wine : ${wines}">
-    		<td th:text="${wine.type}"></td>	
-    		<td th:text="${wine.winename}"></td>
-    		<td th:text="${wine.year}"></td>	
-    		<td th:text="${wine.country.name}"></td>	
-    		<td th:text="${wine.area}"></td>
-    		<td th:text="${#dates.format(wine.timestamp, 'dd.MM.yyyy HH:mm')}"></td>
-    		<td th:text="${wine.notes}"></td>
-    		<td sec:authorize="isAuthenticated()"><form th:action="@{/delete/{id}(id=${wine.wineid})}"> <button type="submit" class="btn btn-outline-danger">Poista</button></form></td>
-
-												
-    	</tr>
-     </table>  
-     </div>	
+      
+	<h4>Viinin poistaminen onnistui</h4>
+	<a href="/winelist">Takaisin listalle</a>
+	</div>
 </body>
 </html>

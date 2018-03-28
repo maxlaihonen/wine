@@ -5,11 +5,14 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import wine.domain.CountryDAO;
 import wine.domain.Wine;
@@ -51,6 +54,25 @@ public class WineController {
 		wineDAO.save(wine);
 		return "redirect:winelist";
 	}
+	
+	@PreAuthorize("isAuthorized()")
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteBook(@PathVariable("id") Long wineid, Model model) {
+    wineDAO.delete(wineid);
+        return "deletesuccess";
+    } 
+	
+	/// REST
+	
+	@RequestMapping(value="/wines", method = RequestMethod.GET)
+	public @ResponseBody List<Wine> winelistRest() {
+		return (List<Wine>) wineDAO.findAll();
+	}
+	
+	@RequestMapping(value="/wines/{id}", method = RequestMethod.GET)
+    public @ResponseBody Wine onewineRest(@PathVariable("id") Long wineid) {	
+		return wineDAO.findOne(wineid);
+    }   
 
 
 }

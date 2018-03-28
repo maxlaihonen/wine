@@ -1,13 +1,36 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Lisää viini</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
-    <link type="text/css" rel="stylesheet" href="css/stickyfooter.css" th:href="@{/css/stickyfooter.css}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/stickyfooter.css" th:href="@{/css/stickyfooter.css}" />
 </head>
 <body>
 <div class="container">
+	
+	<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/winelist">Viinilista</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/add">Lisää viini</a></li>
+					</ul>
+					<div class="nav navbar-nav navbar-right">
+						<div sec:authorize="isAuthenticated()">
+							<form th:action="@{/logout}" method="post" class="navbar-text"> <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Kirjaudu ulos</button></form>
+						</div>
+						<div sec:authorize="!isAuthenticated()">
+						<form sec:authorize="!isAuthenticated()" action="/login" class="navbar-text"><button type="submit" class="btn btn-outline-success my-2 my-sm-0">Kirjaudu sisään</button></form>
+						</div>
+					</div>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!--/.container-fluid -->
+		</nav>
       
 	<h1>Lisää viini</h1>
 			<form th:object="${wine}" th:action="@{add}" action="#" method="post">

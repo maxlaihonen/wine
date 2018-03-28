@@ -1,20 +1,51 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Login</title>
-    </head>
-    <body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Poista viini</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/stickyfooter.css" th:href="@{/css/stickyfooter.css}" />
+</head>
+<body>
+<div class="container">
+	
+	<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/winelist">Viinilista</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/add">Lisää viini</a></li>
+					</ul>
+					<div class="nav navbar-nav navbar-right">
+						<div sec:authorize="isAuthenticated()">
+							<form th:action="@{/logout}" method="post" class="navbar-text"> <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Kirjaudu ulos</button></form>
+						</div>
+						<div sec:authorize="!isAuthenticated()">
+						<form sec:authorize="!isAuthenticated()" action="/login" class="navbar-text"><button type="submit" class="btn btn-outline-success my-2 my-sm-0">Kirjaudu sisään</button></form>
+						</div>
+					</div>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!--/.container-fluid -->
+		</nav>
+  		<div sec:authorize="!isAuthenticated()">
         <div th:if="${param.error}">
-            Invalid username and password.
+            Virheelliset tiedot.
         </div>
         <div th:if="${param.logout}">
-            You have been logged out.
+            Olet kirjautunut ulos.
         </div>
+        <i>admin / admin@123</i><br />
         <form th:action="@{/login}" method="post">
-            <div><label> Username : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
+            <div><label> Käyttäjätunnus: <input type="text" name="username"/> </label></div>
+            <div><label> Salasana: <input type="password" name="password"/> </label></div>
+            <div><input type="submit" value="Kirjaudu"/></div>
         </form>
+        </div>
+        <div sec:authorize="isAuthenticated()"><h1>Olet kirjautunut</h1></div>
+        </div>
     </body>
 </html>
