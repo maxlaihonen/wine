@@ -29,6 +29,11 @@ public class WineController {
 		return "winelist";
 	}
 	
+	@RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addBook(Model model){
 		Wine newwine = new Wine();
@@ -37,15 +42,15 @@ public class WineController {
 		model.addAttribute("countries", countryDAO.findAllCountries());
 		return "addwine";
 	}   
-	
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String save(@Valid Wine wine, BindingResult bindingResult, Model model){
-        if (bindingResult.hasErrors()) {
-        	return "addwine";
-        }
-    		wineDAO.save(wine);
-        return "redirect:winelist";
-    }
+	public String save(@Valid Wine wine, BindingResult bindingResult, Model model){
+		if (bindingResult.hasErrors()) {
+			return "addwine";
+		}
+		wineDAO.save(wine);
+		return "redirect:winelist";
+	}
 
 
 }

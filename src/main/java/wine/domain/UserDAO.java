@@ -1,14 +1,12 @@
 package wine.domain;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CountryDAO {
+public class UserDAO {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -21,11 +19,13 @@ public class CountryDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public List<Country> findAllCountries() {
-		String sql = "SELECT * FROM countries ORDER BY countryname";
-		RowMapper<Country> mapper = new CountryRowMapper();
-		List<Country> countries = jdbcTemplate.query(sql, mapper);
-		return countries;
+	public User findOne(String username) {
+		String sql = "select username, password, authority from users where username = ?";
+		Object[] parameters = new Object[] { username };
+		RowMapper<User> mapper = new UserRowMapper();
+		User user = jdbcTemplate.queryForObject(sql, parameters, mapper);
+		return user;
+
 	}
 
 }
