@@ -32,6 +32,11 @@ public class WineController {
 		return "winelist";
 	}
 	
+	@RequestMapping(value="/")
+	public String index() {
+		return "redirect:/winelist";
+	}
+	
 	@RequestMapping(value="/login")
     public String login() {	
         return "login";
