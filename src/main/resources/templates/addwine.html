@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lisää viini</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="css/stickyfooter.css" th:href="@{/css/stickyfooter.css}" />
+</head>
+<body>
+<div class="container">
+      
+	<h1>Lisää viini</h1>
+			<form th:object="${wine}" th:action="@{add}" action="#" method="post">
+		  		<label for="type">Tyyppi:</label>
+					<select id="type" th:field="*{type}">
+					<option value="Punaviini">Punaviini</option>
+					<option value="Valkoviini">Valkoviini</option>
+					<option value="Kuohuviini">Kuohuviini</option>
+					<option value="Roséviini">Roséviini</option>
+					<option value="Muu">Muu</option>
+					</select>
+				<div th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Error</div>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  		<label for="winename">Nimi</label>
+					<input type="text" id="winename" th:field="*{winename}" maxlength="255" />
+				<div th:if="${#fields.hasErrors('winename')}" th:errors="*{winename}">Error</div>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  		<label for="winename">Vuosi</label>
+					<input type="number" id="year" th:field="*{year}" min="1900" max="2100"/>
+				<div th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Error</div>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  		<label for="type">Maa</label>
+					<select id="country" th:field="*{country.countryid}">
+					<option th:each="country: ${countries}" th:value="${country.countryid}" th:text="${country.name}"></option>
+					</select>
+					<div th:if="${#fields.hasErrors('country')}" th:errors="*{country}">Error</div>
+					
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  		<label for="area">Alue</label>
+					<input type="text" id="area" th:field="*{area}" maxlength="255" />
+				<div th:if="${#fields.hasErrors('area')}" th:errors="*{area}">Error</div>
+				
+				<div style="clear: both; display: block; height: 10px;"></div>
+		  		<label for="notes">Muistiinpanot</label>
+					<textarea id="notes" th:field="*{notes}" maxlength="1500"> </textarea>		
+					
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<input type="submit" class="btn btn-primary" value="Tallenna"></input>
+			<button type="reset" class="btn btn-warning" value="Reset">Reset</button>
+			</form>
+	</div>
+</body>
+</html>

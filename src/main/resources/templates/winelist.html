@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kaikki viinit</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/stickyfooter.css" th:href="@{/css/stickyfooter.css}" />
+</head>
+<body>
+<div class="container">
+	<h1>Kaikki viinit</h1>
+	<a href="/add" class="btn btn-primary">Lisää uusi</a>
+    <table class="table table-striped">
+		<tr>
+			<th>Tyyppi</th>
+		    <th>Nimi</th>
+		    <th>Vuosi</th>
+		    <th>Maa</th>
+		    <th>Alue</th>
+		    <th>Lisätty</th>
+		    <th>Muistiinpanot</th>
+		    
+		</tr>  
+    	<tr th:each = "wine : ${wines}">
+    		<td th:text="${wine.type}"></td>	
+    		<td th:text="${wine.winename}"></td>
+    		<td th:text="${wine.year}"></td>	
+    		<td th:text="${wine.country.name}"></td>	
+    		<td th:text="${wine.area}"></td>
+    		<td th:text="${#dates.format(wine.timestamp, 'dd.MM.yyyy HH:mm')}"></td>
+    		<td th:text="${wine.notes}"></td>						
+    	</tr>
+     </table>  
+     </div>	
+</body>
+</html>

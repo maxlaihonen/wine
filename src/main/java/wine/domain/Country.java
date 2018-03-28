@@ -1,8 +1,18 @@
 package wine.domain;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Country {
 	
+	@Max(12)
+	@Min(0)
 	private long countryid;
+	
+	@NotNull
+	@Size(min=5, max=255)
 	private String name;
 	
 	
